@@ -113,35 +113,53 @@ def letter(title, message):
     ).click()
 
 subject = {
-    "컴퓨터공학개론": {
+    1: {
+        "subject": "컴퓨터공학개론",
         "short": "컴공개",
         "professor": "ㅇㄱㄹ",
         "message": "컴퓨터공학개론(ㅇㄱㄹ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2025학년도 1학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/s6DCeCpi"
     },
-    "C프로그래밍": {
+    2: {
+        "subject": "C프로그래밍",
         "short": "C프",
         "professor": "ㅇㅂㄱ",
         "message": "C프로그래밍(ㅇㅂㄱ 교수님)\n2024학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 기말고사 10,000₩\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2024학년도 1학기 중간/기말고사 15,000₩\n2025학년도 1학기 중간/기말고사 15,000₩\n\n2024/25학년도 1학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/skE6iuqi"
     },
-    "대학수학1": {
+    3: {
+        "subject": "대학수학1",
         "short": "대수1",
         "professor": "ㅂㄱㅅ",
         "message": "대학수학1(ㅂㄱㅅ 교수님)\n2024학년도 1학기 중간고사 10,000₩\nhttps://open.kakao.com/o/sx3Ykuqi"
     },
-    "데이터베이스": {
+    4: {
+        "subject": "데이터베이스",
         "short": "데베",
         "professor": "ㅅㅎㅅ",
         "message": "데이터베이스(ㅅㅎㅅ 교수님)\n2024학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 기말고사 10,000₩\n\n2024학년도 1학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/sOKzbxqi"
     },
-    "통일의인문학적이해": {
+    5: {
+        "subject": "통일의인문학적이해",
         "short": "통인문",
         "professor": "ㄴㄱㅇ,ㅂㅅㅈ",
         "message": "통일의인문학적이해(ㄴㄱㅇ,ㅂㅅㅈ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/s6iRCDqi"
     },
-    "기술변화와소비시장융합:자동차와코스메틱": {
+    6: {
+        "subject": "기술변화와소비시장융합:자동차와코스메틱",
         "short": "기소융",
         "professor": "ㄱㅅㅇ",
         "message": "기술변화와소비시장융합:자동차와코스메틱(ㄱㅅㅇ 교수님)\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/sG2hDDqi"
+    },
+    7: {
+        "subject": "경영학원론",
+        "short": "경원론",
+        "professor": "ㄱㄱㅅ",
+        "message": "경영학원론(ㄱㄱㅅ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2024/25학년도 2학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/sPNTREqi"
+    },
+    8: {
+        "subject": "경영학원론",
+        "short": "경원론",
+        "professor": "ㄱㅊㅇ",
+        "message": "경영학원론(ㄱㅊㅇ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2024/25학년도 1학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/skkcSEqi"
     }
 }
 
@@ -151,7 +169,7 @@ function = {
     "쪽지": lambda: letter(title, message)
 }
 
-subject_list = list(subject.items())
+subject_list = [(v["subject"], v) for v in subject.values()]
 
 for index, (subject, information) in enumerate(subject_list, start=1):
     print(index, subject, information["short"], information["professor"])
