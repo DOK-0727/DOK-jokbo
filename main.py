@@ -135,6 +135,9 @@ def response():
         content = text.split("글 내용:")[1].split("\n")[0].strip()
         match = re.search(r"(.+?)\((.+?) 교수님\)", content)
 
+        if not match:
+            continue
+
         subject_name = match.group(1).strip()
         professor_name = match.group(2).strip()
 
@@ -146,12 +149,19 @@ def response():
                 key, information = subject_list[key - 1]
                 message = information["message"]
 
+                # ⭐ 여기 추가
+                all_text = "\n".join([t.text for t in texts])
+
+                if message in all_text:
+                    continue
+
+                # 메시지 전송
                 wait.until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, "a.send"))
                 ).click()
 
                 wait.until(
-                    EC.presence_of_element_located((By.NAME, "message"))
+                    EC.element_to_be_clickable((By.NAME, "message"))
                 ).send_keys(message)
 
                 wait.until(
