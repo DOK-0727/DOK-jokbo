@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-
+import re
 
 def login():
     wait.until(
@@ -112,7 +112,56 @@ def letter(title, message):
         EC.element_to_be_clickable((By.CSS_SELECTOR, "input.button"))
     ).click()
 
-subject = {
+def response():
+    driver.get("https://everytime.kr/message")
+
+    chats = wait.until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "a.item"))
+    )
+
+    for i in range(len(chats)):
+        wait.until(
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, "div.modalwrap"))
+        )
+
+        chats[i].click()
+
+        texts = wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div.item"))
+        )
+
+        text = texts[len(texts)-2].text
+
+        content = text.split("글 내용:")[1].split("\n")[0].strip()
+        match = re.search(r"(.+?)\((.+?) 교수님\)", content)
+
+        subject_name = match.group(1).strip()
+        professor_name = match.group(2).strip()
+
+        for key, value in subject_dict.items():
+            if (
+                    value["subject"] == subject_name
+                    and value["professor"] == professor_name
+            ):
+                key, information = subject_list[key - 1]
+                message = information["message"]
+
+                wait.until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "a.send"))
+                ).click()
+
+                wait.until(
+                    EC.presence_of_element_located((By.NAME, "message"))
+                ).send_keys(message)
+
+                wait.until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "input.button"))
+                ).click()
+
+                alert = wait.until(EC.alert_is_present())
+                alert.accept()
+
+subject_dict = {
     1: {
         "subject": "컴퓨터공학개론",
         "short": "컴공개",
@@ -166,10 +215,11 @@ subject = {
 function = {
     "작성": lambda: write(subject_name, professor, short),
     "검색": lambda: search(subject_name, professor, short),
-    "쪽지": lambda: letter(title, message)
+    "쪽지": lambda: letter(title, message),
+    "답장": lambda: response()
 }
 
-subject_list = [(v["subject"], v) for v in subject.values()]
+subject_list = [(v["subject"], v) for v in subject_dict.values()]
 
 for index, (subject, information) in enumerate(subject_list, start=1):
     print(index, subject, information["short"], information["professor"])
