@@ -251,9 +251,9 @@ for idx, function_name in enumerate(function.keys(), start=1):
 
 function_number = list(map(int, input("번호를 입력해주세요:").replace(",", " ").split()))
 
-if (function_number == [1]):
-    subject_list = [(v["subject"], v) for v in subject_dict.values()]
+subject_list = [(v["subject"], v) for v in subject_dict.values()]
 
+if (function_number == [1]):
     for index, (subject, information) in enumerate(subject_list, start=1):
         print(index, subject, information["short"], information["professor"])
 
@@ -288,7 +288,6 @@ elif (function_number == [3]):
     short = information["short"]
     professor = information["professor"]
     message = information["message"]
-
 chrome_path = "/Users/handokyung/Desktop/Python/chromedriver-mac-arm64/chromedriver"
 service = Service(chrome_path)
 driver = webdriver.Chrome(service=service)
