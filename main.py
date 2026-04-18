@@ -69,8 +69,8 @@ def search(subject, professor, short):
         title_text = titles[i].text
         body_text = texts[i].text
 
-        if (subject or short) in title_text or professor in title_text \
-                or (subject or short) in body_text or professor in body_text:
+        if (subject or short) in title_text and professor in title_text \
+                or (subject or short) in body_text and professor in body_text:
             print("\n")
             print("제목:", title_text)
             print("본문:", body_text)
@@ -85,14 +85,28 @@ def letter(title, message):
 
         for el in elements:
             if title in el.text:
-                el.find_element(By.XPATH, "./ancestor::a").click()
+
+                link = el.find_element(By.XPATH, "./ancestor::a")
+
+                driver.execute_script(
+                    "arguments[0].scrollIntoView({block: 'center'});", link
+                )
+                time.sleep(0.5)
+
+                try:
+                    link.click()
+                except:
+                    driver.execute_script("arguments[0].click();", link)
+
                 break
+
         else:
             last_height = driver.execute_script("return document.body.scrollHeight")
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(1)
 
             new_height = driver.execute_script("return document.body.scrollHeight")
+
             if last_height == new_height:
                 print("글을 발견하지 못했습니다")
                 return
@@ -109,8 +123,11 @@ def letter(title, message):
     ).send_keys(message)
 
     wait.until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input.button"))
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[value='전송']"))
     ).click()
+
+    alert = wait.until(EC.alert_is_present())
+    alert.accept()
 
 def response():
     driver.get("https://everytime.kr/message")
@@ -210,13 +227,13 @@ subject_dict = {
         "subject": "경영학원론",
         "short": "경원론",
         "professor": "ㄱㄱㅅ",
-        "message": "경영학원론(ㄱㄱㅅ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2024/25학년도 2학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/sPNTREqi\n구매 의향 있으신가요?"
+        "message": "경영학원론(ㄱㄱㅅ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\n\n2024/25학년도 2학기 중간/기말고사 20,000₩\nhttps://open.kakao.com/o/sPNTREqi\n구매 의향 있으신가요?"
     },
     8: {
         "subject": "경영학원론",
         "short": "경원론",
         "professor": "ㄱㅊㅇ",
-        "message": "경영학원론(ㄱㅊㅇ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2024/25학년도 1학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/skkcSEqi\n구매 의향 있으신가요?"
+        "message": "경영학원론(ㄱㅊㅇ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2025학년도 1학기 중간/기말고사 15,000₩\n\n2024/25학년도 1학기 중간/기말고사 20,000₩\nhttps://open.kakao.com/o/skkcSEqi\n구매 의향 있으신가요?"
     }
 }
 
@@ -227,18 +244,6 @@ function = {
     "답장": lambda: response()
 }
 
-subject_list = [(v["subject"], v) for v in subject_dict.values()]
-
-for index, (subject, information) in enumerate(subject_list, start=1):
-    print(index, subject, information["short"], information["professor"])
-
-subject_number = int(input("번호를 입력해주세요:"))
-
-subject_name, information = subject_list[subject_number - 1]
-short = information["short"]
-professor = information["professor"]
-message = information["message"]
-
 function_list = list(function.items())
 
 for idx, function_name in enumerate(function.keys(), start=1):
@@ -246,8 +251,43 @@ for idx, function_name in enumerate(function.keys(), start=1):
 
 function_number = list(map(int, input("번호를 입력해주세요:").replace(",", " ").split()))
 
-if (function_number == [3]):
+if (function_number == [1]):
+    subject_list = [(v["subject"], v) for v in subject_dict.values()]
+
+    for index, (subject, information) in enumerate(subject_list, start=1):
+        print(index, subject, information["short"], information["professor"])
+
+    subject_number = int(input("번호를 입력해주세요:"))
+
+    subject_name, information = subject_list[subject_number - 1]
+    short = information["short"]
+    professor = information["professor"]
+    message = information["message"]
+elif (function_number == [2]):
+    subject_list = [(v["subject"], v) for v in subject_dict.values()]
+
+    for index, (subject, information) in enumerate(subject_list, start=1):
+        print(index, subject, information["short"], information["professor"])
+
+    subject_number = int(input("번호를 입력해주세요:"))
+
+    subject_name, information = subject_list[subject_number - 1]
+    short = information["short"]
+    professor = information["professor"]
+    message = information["message"]
+elif (function_number == [3]):
     title = input("글의 제목을 입력해주세요:")
+    subject_list = [(v["subject"], v) for v in subject_dict.values()]
+
+    for index, (subject, information) in enumerate(subject_list, start=1):
+        print(index, subject, information["short"], information["professor"])
+
+    subject_number = int(input("번호를 입력해주세요:"))
+
+    subject_name, information = subject_list[subject_number - 1]
+    short = information["short"]
+    professor = information["professor"]
+    message = information["message"]
 
 chrome_path = "/Users/handokyung/Desktop/Python/chromedriver-mac-arm64/chromedriver"
 service = Service(chrome_path)
