@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import re
 
+
 def login():
     wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "button.continue"))
@@ -69,8 +70,10 @@ def search(subject, professor, short):
         title_text = titles[i].text
         body_text = texts[i].text
 
-        if (subject or short) in title_text and professor in title_text \
-                or (subject or short) in body_text and professor in body_text:
+        if (subject in title_text or short in title_text) and professor in title_text \
+                or (subject in body_text or short in body_text) and professor in body_text:
+                # \
+                # or ("삽니다" in title_text or "삽니다" in body_text):
             print("\n")
             print("제목:", title_text)
             print("본문:", body_text)
@@ -129,6 +132,7 @@ def letter(title, message):
     alert = wait.until(EC.alert_is_present())
     alert.accept()
 
+
 def response():
     driver.get("https://everytime.kr/message")
 
@@ -147,7 +151,7 @@ def response():
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div.item"))
         )
 
-        text = texts[len(texts)-2].text
+        text = texts[len(texts) - 2].text
 
         content = text.split("글 내용:")[1].split("\n")[0].strip()
         match = re.search(r"(.+?)\((.+?) 교수님\)", content)
@@ -186,6 +190,7 @@ def response():
                 alert = wait.until(EC.alert_is_present())
                 alert.accept()
 
+
 subject_dict = {
     1: {
         "subject": "컴퓨터공학개론",
@@ -203,7 +208,7 @@ subject_dict = {
         "subject": "대학수학1",
         "short": "대수1",
         "professor": "ㅂㄱㅅ",
-        "message": "대학수학1(ㅂㄱㅅ 교수님)\n2024학년도 1학기 중간고사 10,000₩\nhttps://open.kakao.com/o/sx3Ykuqi\n구매 의향 있으신가요?"
+        "message": "대학수학1(ㅂㄱㅅ 교수님)\n2023학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 중간고사 10,000₩\n2026학년도 1학기 중간고사 10,000₩\n\n2023/24/26학년도 1학기 중간고사 25,000₩\nhttps://open.kakao.com/o/sx3Ykuqi\n구매 의향 있으신가요?"
     },
     4: {
         "subject": "데이터베이스",
@@ -234,6 +239,42 @@ subject_dict = {
         "short": "경원론",
         "professor": "ㄱㅊㅇ",
         "message": "경영학원론(ㄱㅊㅇ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2025학년도 1학기 중간/기말고사 15,000₩\n\n2024/25학년도 1학기 중간/기말고사 20,000₩\nhttps://open.kakao.com/o/skkcSEqi\n구매 의향 있으신가요?"
+    },
+    9: {
+        "subject": "컴퓨팅적사고",
+        "short": "컴사",
+        "professor": "ㅇㅁㅈ",
+        "message": "컴퓨팅적사고(ㅇㅁㅈ 교수님))\n2024학년도 1학기 중간고사 10,000₩\nhttps://open.kakao.com/o/smTxjuqi\n구매 의향 있으신가요?"
+    },
+    10: {
+        "subject": "C프로그래밍",
+        "short": "C프",
+        "professor": "ㅂㅅㅇ",
+        "message": "C프로그래밍(ㅂㅅㅇ 교수님)\n2021학년도 1학기 중간고사 10,000₩\nhttps://open.kakao.com/o/suL4dfri\n구매 의향 있으신가요?"
+    },
+    11: {
+        "subject": "대학물리학1",
+        "short": "대물1",
+        "professor": "ㄱㅊㅁ",
+        "message": "대학물리학1(ㄱㅊㅁ 교수님)\n2024학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 기말고사 10,000₩\n\n2024학년도 1학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/sfER7eri\n구매 의향 있으신가요?"
+    },
+    12: {
+        "subject": "공학수학1",
+        "short": "공수1",
+        "professor": "ㅇㄱㅅ",
+        "message": "공학수학1(ㅇㄱㅅ 교수님)\n2024학년도 1학기 중간고사 5,000₩\n2024학년도 1학기 기말고사 5,000₩\n\n2024학년도 1학기 중간/기말고사 7,5000₩\nhttps://open.kakao.com/o/s8PvShri\n구매 의향 있으신가요?"
+    },
+    13: {
+        "subject": "펜데믹이후의공공철학",
+        "short": "펜이공철",
+        "professor": "ㄱㅎㅅ",
+        "message": "펜데믹이후의공공철학(ㄱㅎㅅ 교수님)\n2024학년도 2학기 중간고사 10,000₩\nhttps://open.kakao.com/o/spS70kri\n구매 의향 있으신가요?"
+    },
+    14: {
+        "subject": "현대사회와지속가능경영",
+        "short": "현사지경",
+        "professor": "ㅇㅈㅇ",
+        "message": "현대사회와지속가능경영(ㅇㅈㅇ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/snyH7kri\n구매 의향 있으신가요?"
     }
 }
 
