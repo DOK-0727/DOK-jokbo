@@ -7,7 +7,7 @@ import time
 import re
 
 
-def login():
+def login(user_id, user_pw):
     wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "button.continue"))
     ).click()
@@ -18,11 +18,11 @@ def login():
 
     wait.until(
         EC.presence_of_element_located((By.NAME, "id"))
-    ).send_keys("dokyung2727")
+    ).send_keys(user_id)
 
     wait.until(
         EC.presence_of_element_located((By.NAME, "password"))
-    ).send_keys("201745hksS!")
+    ).send_keys(user_pw)
 
     wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "input[type='submit']"))
@@ -54,6 +54,8 @@ def write(subject, professor, short):
         EC.element_to_be_clickable((By.CSS_SELECTOR, "li.submit"))
     ).click()
 
+    alert = wait.until(EC.alert_is_present())
+    alert.accept()
 
 def search(subject, professor, short, message):
     driver.get("https://everytime.kr/370471")
@@ -161,8 +163,7 @@ def response():
                     value["subject"] == subject_name
                     and value["professor"] == professor_name
             ):
-                key, information = subject_list[key - 1]
-                message = information["message"]
+                message = value["message"]
 
                 all_text = "\n".join([t.text for t in texts])
 
@@ -184,6 +185,34 @@ def response():
                 alert = wait.until(EC.alert_is_present())
                 alert.accept()
 
+
+def run_bot(user_id, user_pw, function_number, subject_number, subjects):
+    chrome_path = "/Users/handokyung/Desktop/Python/chromedriver-mac-arm64/chromedriver"
+    service = Service(chrome_path)
+    global driver, wait
+
+    driver = webdriver.Chrome(service=service)
+    wait = WebDriverWait(driver, 15)
+
+    driver.get("https://everytime.kr")
+
+    login(user_id, user_pw)
+
+    global subject_list
+    subject_list = [(v["subject"], v) for v in subject_dict.values()]
+
+    if 1 in function_number:
+        subject = subjects[subject_number - 1]
+        write(subject["subject"], subject["professor"], subject["short"])
+
+    if 2 in function_number:
+        for v in subjects:
+            search(v["subject"], v["professor"], v["short"], v["message"])
+
+    if 3 in function_number:
+        response()
+
+    driver.quit()
 
 subject_dict = {
     1: {
@@ -271,42 +300,3 @@ subject_dict = {
         "message": "현대사회와지속가능경영(ㅇㅈㅇ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/snyH7kri\n구매 의향 있으신가요?"
     }
 }
-
-function = {
-    "작성": lambda: write(subject, professor, short),
-    "검색": lambda: [ search(v["subject"], v["professor"], v["short"], v["message"]) for v in subject_dict.values() ],
-    "답장": lambda: response()
-}
-
-function_list = list(function.items())
-
-for idx, function_name in enumerate(function.keys(), start=1):
-    print(idx, function_name)
-
-function_number = list(map(int, input("번호를 입력해주세요:").replace(",", " ").split()))
-
-subject_list = [(v["subject"], v) for v in subject_dict.values()]
-
-if (function_number == [1]):
-    for index, (subject, information) in enumerate(subject_list, start=1):
-        print(index, subject, information["short"], information["professor"])
-
-    subject_number = int(input("번호를 입력해주세요:"))
-
-    subject, information = subject_list[subject_number - 1]
-    short = information["short"]
-    professor = information["professor"]
-    message = information["message"]
-
-chrome_path = "/Users/handokyung/Desktop/Python/chromedriver-mac-arm64/chromedriver"
-service = Service(chrome_path)
-driver = webdriver.Chrome(service=service)
-
-driver.get("https://everytime.kr")
-wait = WebDriverWait(driver, 15)
-
-login()
-time.sleep(2)
-for n in function_number:
-    function_list[n - 1][1]()
-    time.sleep(2)

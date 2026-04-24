@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>에브리타임 자동화</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="layout">
+
+            <div class="card left">
+
+                <h2>로그인</h2>
+
+                <form id="form">
+
+                    <div class="section">
+                        <input class="text" name="id" placeholder="아이디">
+                        <input class="text" name="pw" type="password" placeholder="비밀번호">
+                    </div>
+
+                    <div class="section">
+                        <h2>기능 선택</h2>
+
+                        <div class="checkbox-row">
+
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="function" value="1" id="f1">
+                                <label for="f1">작성</label>
+                            </div>
+
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="function" value="2" id="f2">
+                                <label for="f2">검색</label>
+                            </div>
+
+                            <div class="checkbox-item">
+                                <input type="checkbox" name="function" value="3" id="f3">
+                                <label for="f3">답장</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <input class="text" name="subject_number" placeholder="과목 번호">
+                    </div>
+
+                    <button class="btn primary" type="submit">기능 실행</button>
+
+                </form>
+
+            </div>
+
+            <div class="card right">
+
+                <h2>과목 관리</h2>
+
+                <div class="section">
+                    <input class="text" id="subject" placeholder="과목명">
+                    <input class="text" id="short" placeholder="약어">
+                    <input class="text" id="professor" placeholder="교수명">
+                    <input class="text" id="message" placeholder="메시지">
+                </div>
+
+                <button class="btn" type="button" onclick="addSubject()">과목 추가</button>
+
+                <hr>
+
+                <div id="list"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>ㄴ
