@@ -1,6 +1,7 @@
 const form = document.getElementById("form");
 
 let subjects = JSON.parse(localStorage.getItem("subjects")) || [];
+let editIndex = -1;
 
 window.onload = () => {
     render();
@@ -17,12 +18,12 @@ function addSubject() {
         return;
     }
 
-    subjects.push({
-        subject,
-        short,
-        professor,
-        message
-    });
+    if (editIndex === -1) {
+        subjects.push({ subject, short, professor, message });
+    } else {
+        subjects[editIndex] = { subject, short, professor, message };
+        editIndex = -1;
+    }
 
     saveSubjects();
     render();
@@ -32,6 +33,7 @@ function addSubject() {
     document.getElementById("professor").value = "";
     document.getElementById("message").value = "";
 }
+
 
 function removeSubject(index) {
     subjects.splice(index, 1);
@@ -57,10 +59,22 @@ function render() {
             <div style="margin-bottom:10px; padding:8px; border:1px solid #ddd;">
                 <b>${s.subject}</b> (${s.professor})<br>
                 <small>${s.short}</small><br>
+                <button onclick="editSubject(${i})" style="border-radius: 5px; border: none; background: #0095f6; color: white; cursor: pointer;">수정</button>
                 <button onclick="removeSubject(${i})" style="border-radius: 5px; border: none; background: #0095f6; color: white; cursor: pointer;">삭제</button>
             </div>
         `;
     });
+}
+
+function editSubject(index) {
+    const s = subjects[index];
+
+    document.getElementById("subject").value = s.subject;
+    document.getElementById("short").value = s.short;
+    document.getElementById("professor").value = s.professor;
+    document.getElementById("message").value = s.message;
+
+    editIndex = index;
 }
 
 form.addEventListener("submit", async (event) => {

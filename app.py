@@ -34,7 +34,3 @@ def run():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-subject_dict = {
-                14: {"subject": "현대사회와지속가능경영", "short": "현사지경", "professor": "ㅇㅈㅇ",
-                     "message": "현대사회와지속가능경영(ㅇㅈㅇ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/snyH7kri\n구매 의향 있으신가요?"}}

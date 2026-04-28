@@ -57,6 +57,16 @@ input:focus {
     background: #fafafa;
 }
 
+textarea {
+    width: 380px;
+    height: 150px;
+    padding: 10px;
+    margin: 6px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
 .btn {
     width: 100%;
     padding: 10px;
@@ -82,7 +92,6 @@ input:focus {
     margin-top: 10px;
 }
 
-/* 🔥 핵심: 세로 정렬 */
 .checkbox-item {
     display: flex;
     flex-direction: column;
@@ -91,14 +100,12 @@ input:focus {
     gap: 6px;
 }
 
-/* 체크박스 크기 약간 개선 */
 .checkbox-item input {
     width: 18px;
     height: 18px;
     cursor: pointer;
 }
 
-/* label 스타일 */
 .checkbox-item label {
     cursor: pointer;
     font-size: 13px;
