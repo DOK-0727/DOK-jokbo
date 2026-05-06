@@ -34,7 +34,6 @@ function addSubject() {
     document.getElementById("message").value = "";
 }
 
-
 function removeSubject(index) {
     subjects.splice(index, 1);
     saveSubjects();
@@ -47,7 +46,10 @@ function saveSubjects() {
 
 function render() {
     const list = document.getElementById("list");
+    const select = document.getElementById("subjectSelect");
+
     list.innerHTML = "";
+    select.innerHTML = '<option value="">과목 선택</option>';
 
     if (subjects.length === 0) {
         list.innerHTML = "<p>등록된 과목이 없습니다</p>";
@@ -62,6 +64,12 @@ function render() {
                 <button onclick="editSubject(${i})" style="border-radius: 5px; border: none; background: #0095f6; color: white; cursor: pointer;">수정</button>
                 <button onclick="removeSubject(${i})" style="border-radius: 5px; border: none; background: #0095f6; color: white; cursor: pointer;">삭제</button>
             </div>
+        `;
+
+        select.innerHTML += `
+            <option value="${i + 1}">
+                ${i + 1}. ${s.subject} (${s.professor})
+            </option>
         `;
     });
 }
@@ -82,6 +90,11 @@ form.addEventListener("submit", async (event) => {
 
     try {
         const formData = new FormData(form);
+
+        if (!formData.get("subject_number")) {
+            alert("과목을 선택하세요");
+            return;
+        }
 
         formData.append("subjects", JSON.stringify(subjects));
 

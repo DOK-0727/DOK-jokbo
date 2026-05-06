@@ -67,6 +67,19 @@ textarea {
     background: #fafafa;
 }
 
+select {
+    width: 400px !important;
+    padding: 10px 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background: #fafafa;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+
 .btn {
     width: 100%;
     padding: 10px;
