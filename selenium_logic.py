@@ -30,7 +30,6 @@ def login(user_id, user_pw):
 
     wait.until(lambda d: "login" not in d.current_url)
 
-
 def write(subject, professor, short):
     driver.get("https://everytime.kr/370471")
 
@@ -129,7 +128,7 @@ def search(subject, professor, short, message):
             alert.accept()
 
 
-def response():
+def response(subjects):
     driver.get("https://everytime.kr/message")
 
     chats = wait.until(
@@ -158,7 +157,7 @@ def response():
         subject_name = match.group(1).strip()
         professor_name = match.group(2).strip()
 
-        for key, value in subject_dict.items():
+        for key, value in subjects.items():
             if (
                     value["subject"] == subject_name
                     and value["professor"] == professor_name
@@ -199,7 +198,7 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
     login(user_id, user_pw)
 
     global subject_list
-    subject_list = [(v["subject"], v) for v in subject_dict.values()]
+    subject_list = [(v["subject"], v) for v in subjects.values()]
 
     if 1 in function_number:
         subject = subjects[subject_number - 1]
@@ -210,93 +209,6 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
             search(v["subject"], v["professor"], v["short"], v["message"])
 
     if 3 in function_number:
-        response()
+        response(subjects)
 
     driver.quit()
-
-subject_dict = {
-    1: {
-        "subject": "컴퓨터공학개론",
-        "short": "컴공개",
-        "professor": "ㅇㄱㄹ",
-        "message": "컴퓨터공학개론(ㅇㄱㄹ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n2026학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 중간/기말고사 15,000₩\n\n2025/26학년도 1학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/s6DCeCpi\n구매 의향 있으신가요?"
-    },
-    2: {
-        "subject": "C프로그래밍",
-        "short": "C프",
-        "professor": "ㅇㅂㄱ",
-        "message": "C프로그래밍(ㅇㅂㄱ 교수님)\n2024학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 기말고사 10,000₩\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2024학년도 1학기 중간/기말고사 15,000₩\n2025학년도 1학기 중간/기말고사 15,000₩\n\n2024/25학년도 1학기 중간/기말고사 25,000₩\nhttps://open.kakao.com/o/skE6iuqi\n구매 의향 있으신가요?"
-    },
-    3: {
-        "subject": "대학수학1",
-        "short": "대수1",
-        "professor": "ㅂㄱㅅ",
-        "message": "대학수학1(ㅂㄱㅅ 교수님)\n2023학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 중간고사 10,000₩\n2026학년도 1학기 중간고사 10,000₩\n\n2023/24/26학년도 1학기 중간고사 25,000₩\nhttps://open.kakao.com/o/sx3Ykuqi\n구매 의향 있으신가요?"
-    },
-    4: {
-        "subject": "데이터베이스",
-        "short": "데베",
-        "professor": "ㅅㅎㅅ",
-        "message": "데이터베이스(ㅅㅎㅅ 교수님)\n2024학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 기말고사 10,000₩\n\n2024학년도 1학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/sOKzbxqi\n구매 의향 있으신가요?"
-    },
-    5: {
-        "subject": "통일의인문학적이해",
-        "short": "통인문",
-        "professor": "ㄴㄱㅇ,ㅂㅅㅈ",
-        "message": "통일의인문학적이해(ㄴㄱㅇ,ㅂㅅㅈ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/s6iRCDqi\n구매 의향 있으신가요?"
-    },
-    6: {
-        "subject": "기술변화와소비시장융합:자동차와코스메틱",
-        "short": "기소융",
-        "professor": "ㄱㅅㅇ",
-        "message": "기술변화와소비시장융합:자동차와코스메틱(ㄱㅅㅇ 교수님)\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/sG2hDDqi\n구매 의향 있으신가요?"
-    },
-    7: {
-        "subject": "경영학원론",
-        "short": "경원론",
-        "professor": "ㄱㄱㅅ",
-        "message": "경영학원론(ㄱㄱㅅ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\n\n2024/25학년도 2학기 중간/기말고사 20,000₩\nhttps://open.kakao.com/o/sPNTREqi\n구매 의향 있으신가요?"
-    },
-    8: {
-        "subject": "경영학원론",
-        "short": "경원론",
-        "professor": "ㄱㅊㅇ",
-        "message": "경영학원론(ㄱㅊㅇ 교수님)\n2025학년도 1학기 중간고사 10,000₩\n2025학년도 1학기 기말고사 10,000₩\n\n2025학년도 1학기 중간/기말고사 15,000₩\n\n2024/25학년도 1학기 중간/기말고사 20,000₩\nhttps://open.kakao.com/o/skkcSEqi\n구매 의향 있으신가요?"
-    },
-    9: {
-        "subject": "컴퓨팅적사고",
-        "short": "컴사",
-        "professor": "ㅇㅁㅈ",
-        "message": "컴퓨팅적사고(ㅇㅁㅈ 교수님))\n2024학년도 1학기 중간고사 10,000₩\nhttps://open.kakao.com/o/smTxjuqi\n구매 의향 있으신가요?"
-    },
-    10: {
-        "subject": "C프로그래밍",
-        "short": "C프",
-        "professor": "ㅂㅅㅇ",
-        "message": "C프로그래밍(ㅂㅅㅇ 교수님)\n2021학년도 1학기 중간고사 10,000₩\nhttps://open.kakao.com/o/suL4dfri\n구매 의향 있으신가요?"
-    },
-    11: {
-        "subject": "대학물리학1",
-        "short": "대물1",
-        "professor": "ㄱㅊㅁ",
-        "message": "대학물리학1(ㄱㅊㅁ 교수님)\n2024학년도 1학기 중간고사 10,000₩\n2024학년도 1학기 기말고사 10,000₩\n\n2024학년도 1학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/sfER7eri\n구매 의향 있으신가요?"
-    },
-    12: {
-        "subject": "공학수학1",
-        "short": "공수1",
-        "professor": "ㅇㄱㅅ",
-        "message": "공학수학1(ㅇㄱㅅ 교수님)\n2024학년도 1학기 중간고사 5,000₩\n2024학년도 1학기 기말고사 5,000₩\n\n2024학년도 1학기 중간/기말고사 75,000₩\nhttps://open.kakao.com/o/s8PvShri\n구매 의향 있으신가요?"
-    },
-    13: {
-        "subject": "펜데믹이후의공공철학",
-        "short": "펜이공철",
-        "professor": "ㄱㅎㅅ",
-        "message": "펜데믹이후의공공철학(ㄱㅎㅅ 교수님)\n2024학년도 2학기 중간고사 10,000₩\nhttps://open.kakao.com/o/spS70kri\n구매 의향 있으신가요?"
-    },
-    14: {
-        "subject": "현대사회와지속가능경영",
-        "short": "현사지경",
-        "professor": "ㅇㅈㅇ",
-        "message": "현대사회와지속가능경영(ㅇㅈㅇ 교수님)\n2025학년도 2학기 중간고사 10,000₩\n2025학년도 2학기 기말고사 10,000₩\n\n2025학년도 2학기 중간/기말고사 15,000₩\nhttps://open.kakao.com/o/snyH7kri\n구매 의향 있으신가요?"
-    }
-}
