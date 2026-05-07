@@ -169,17 +169,25 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
     driver = webdriver.Chrome(service=service)
     wait = WebDriverWait(driver, 15)
 
-    driver.get("https://everytime.kr")
+    driver.get("https://everytime.kr/")
 
-    login(user_id, user_pw)
+    # login(user_id, user_pw)
 
     if 1 in function_number:
-        subject = subjects[subject_number - 1]
-        write(subject["subject"], subject["professor"], subject["short"])
+        if subject_number == 0:
+            for v in subjects:
+                write(v["subject"], v["professor"], v["short"])
+        else:
+            subject = subjects[subject_number - 1]
+            write(subject["subject"], subject["professor"], subject["short"])
 
     if 2 in function_number:
-        for v in subjects:
-            search(v["subject"], v["professor"], v["short"], v["message"])
+        if subject_number == 0:
+            for v in subjects:
+                search(v["subject"], v["professor"], v["short"], v["message"])
+        else:
+            subject = subjects[subject_number - 1]
+            search(subject["subject"], subject["professor"], subject["short"], subject["message"])
 
     if 3 in function_number:
         response(subjects)

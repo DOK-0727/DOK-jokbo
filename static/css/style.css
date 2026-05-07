@@ -68,6 +68,7 @@ textarea {
 }
 
 select {
+    display: none;
     width: 400px !important;
     padding: 10px 14px;
     border: 1px solid #dbdbdb;

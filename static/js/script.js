@@ -1,3 +1,23 @@
+const write = document.getElementById("f1");
+const search = document.getElementById("f2");
+const select = document.getElementById("subjectSelect");
+
+write.addEventListener("change", function () {
+    if (write.checked) {
+        select.style.display = "block";
+    } else {
+        select.style.display = "none";
+    }
+});
+
+search.addEventListener("change", function () {
+    if (search.checked) {
+        select.style.display = "block";
+    } else {
+        select.style.display = "none";
+    }
+});
+
 const form = document.getElementById("form");
 
 let subjects = JSON.parse(localStorage.getItem("subjects")) || [];
@@ -49,7 +69,7 @@ function render() {
     const select = document.getElementById("subjectSelect");
 
     list.innerHTML = "";
-    select.innerHTML = '<option value="">과목 선택</option>';
+    select.innerHTML = '<option value="0">전체 선택</option>';
 
     if (subjects.length === 0) {
         list.innerHTML = "<p>등록된 과목이 없습니다</p>";
