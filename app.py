@@ -4,11 +4,9 @@ import json
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 @app.route("/run", methods=["POST"])
 def run():
@@ -30,7 +28,6 @@ def run():
     except Exception as e:
         print(e)
         return jsonify({"message": str(e)}), 500
-
 
 if __name__ == "__main__":
     app.run(debug=True)

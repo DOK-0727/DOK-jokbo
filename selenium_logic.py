@@ -162,7 +162,7 @@ def response(subjects):
 
 
 def run_bot(user_id, user_pw, function_number, subject_number, subjects):
-    chrome_path = "/Users/handokyung/Desktop/Python/chromedriver-mac-arm64/chromedriver"
+    chrome_path = "/Users/handokyung/Desktop/DOK/Python/chromedriver-mac-arm64/chromedriver"
     service = Service(chrome_path)
 
     global driver, wait
