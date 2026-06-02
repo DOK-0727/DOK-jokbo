@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import time
 import re
+import pyperclip
 
 
 def login(user_id, user_pw):
@@ -109,6 +110,8 @@ def search(subject, professor, short, message):
             alert = wait.until(EC.alert_is_present())
             alert.accept()
 
+            driver.get("https://everytime.kr/370471")
+
 
 def response(subjects):
     driver.get("https://everytime.kr/message")
@@ -172,6 +175,7 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
     driver.get("https://everytime.kr/")
 
     # login(user_id, user_pw)
+    pyperclip.copy(user_id)
 
     if 1 in function_number:
         if subject_number == 0:
