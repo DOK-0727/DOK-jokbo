@@ -4,10 +4,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
 import pyperclip
-
 
 def login(user_id, user_pw):
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.continue"))).click()
@@ -169,6 +169,7 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
     service = Service(chrome_path)
 
     global driver, wait
+    service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)
     wait = WebDriverWait(driver, 15)
 
