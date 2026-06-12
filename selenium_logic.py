@@ -15,19 +15,9 @@ def login(user_id, user_pw):
     wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "로그인"))).click()
 
     wait.until(EC.presence_of_element_located((By.NAME, "id"))).send_keys(user_id)
-    wait.until(EC.presence_of_element_located((By.NAME, "password"))).send_keys(user_pw)
+    pyperclip.copy(user_pw)
 
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[type='submit']"))).click()
-
-    try:
-        alert = WebDriverWait(driver, 3).until(EC.alert_is_present())
-        print("로그인 실패:", alert.text)
-        alert.accept()
-        raise Exception("로그인 실패")
-    except TimeoutException:
-        pass
-
-    wait.until(lambda d: "login" not in d.current_url)
+    wait.until(lambda driver: "login" not in driver.current_url)
 
 
 def write(subject, professor, short):
@@ -175,10 +165,7 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
 
     driver.get("https://everytime.kr/")
 
-    # login(user_id, user_pw)
-    pyperclip.copy(user_id)
-    time.sleep(2)
-    pyperclip.copy(user_pw)
+    login(user_id, user_pw)
 
     if 1 in function_number:
         if subject_number == 0:
