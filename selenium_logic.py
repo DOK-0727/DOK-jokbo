@@ -177,6 +177,8 @@ def run_bot(user_id, user_pw, function_number, subject_number, subjects):
 
     # login(user_id, user_pw)
     pyperclip.copy(user_id)
+    time.sleep(2)
+    pyperclip.copy(user_pw)
 
     if 1 in function_number:
         if subject_number == 0:
