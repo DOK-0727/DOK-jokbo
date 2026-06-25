@@ -8,6 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
 import pyperclip
+from selenium.webdriver.chrome.options import Options
 
 def login(user_id, user_pw):
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.continue"))).click()
@@ -155,17 +156,24 @@ def response(subjects):
 
 
 def run_bot(user_id, user_pw, function_number, subject_number, subjects):
-    chrome_path = "/Users/handokyung/Desktop/Python/chromedriver-mac-arm64/chromedriver"
-    service = Service(chrome_path)
-
     global driver, wait
+
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+
+    options = Options()
+
+    options.add_argument(
+        "user-data-dir=/Users/handokyung/Desktop/DOK/DOK-jokbo/everytime_profile"
+    )
+
+    driver = webdriver.Chrome(
+        service=service,
+        options=options
+    )
+
     wait = WebDriverWait(driver, 15)
 
     driver.get("https://everytime.kr/")
-
-    login(user_id, user_pw)
 
     if 1 in function_number:
         if subject_number == 0:
