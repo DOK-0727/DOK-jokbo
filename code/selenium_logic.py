@@ -14,8 +14,8 @@ def login(user_id, user_pw):
 
     wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "로그인"))).click()
 
-    wait.until(EC.presence_of_element_located((By.NAME, "id"))).send_keys(user_id)
-    pyperclip.copy(user_pw)
+    pyperclip.copy(user_id)
+    #pyperclip.copy(user_pw)
 
     wait.until(lambda driver: "login" not in driver.current_url)
 
