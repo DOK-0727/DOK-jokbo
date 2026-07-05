@@ -1,15 +1,3 @@
-<h3>과목 관리</h3>
-<img src="image/Element/subject_management.png">
-<p>이 요소는 족보 작업 과목을 관리하는 기능을 제공합니다.</p>
-<p>
-    <img src="image/Tech/HTML.jpeg" height="12px;">HTML
-    <img src="image/Tech/CSS.jpeg" height="12px;">CSS
-    <img src="image/Tech/JavaScript.jpeg" height="12px;">JavaScript
-    <img src="image/Tech/Python.jpeg" height="12px;">Python
-</P>
-
-------------–--------------------
-
 <p align="center">
   <a href="">
     <img src="image/DOK.jpg" alt="Project Logo" width="150" height="150">
