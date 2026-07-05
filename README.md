@@ -96,7 +96,7 @@
 <summary><b>로그인</b></summary>
 <br>
 <p align="center">
-  <img src="image/Element/login.png" width="350">
+  <img src="image/Element/login.png" width="300">
   <br>
   <img src="image/Tech/HTML.jpeg" height="12px;">HTML
   <img src="image/Tech/CSS.jpeg" height="12px;">CSS
@@ -111,7 +111,7 @@
 <summary><b>기능 선택</b></summary>
 <br>
 <p align="center">
-  <img src="image/Element/function_selection.png" width="350">
+  <img src="image/Element/function_selection.png" width="300">
   <br>
   <img src="image/Tech/HTML.jpeg" height="12px;">HTML
   <img src="image/Tech/CSS.jpeg" height="12px;">CSS
@@ -126,7 +126,7 @@
 <summary><b>과목 관리</b></summary>
 <br>
 <p align="center">
-  <img src="image/Element/subject_management.png" width="350">
+  <img src="image/Element/subject_management.png" width="300">
   <br>
   <img src="image/Tech/HTML.jpeg" height="12px;">HTML
   <img src="image/Tech/CSS.jpeg" height="12px;">CSS
