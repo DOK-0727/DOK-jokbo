@@ -50,7 +50,7 @@
 </tr>
 <tr>
 <td>운영 환경</td>
-<td></td>
+<td>개인 노트북</td>
 </tr>
 <tr>
 <td>사용자 수</td>
@@ -70,14 +70,12 @@
 <img src="image/Tech/HTML.jpeg" height="12px;">HTML
 <img src="image/Tech/CSS.jpeg" height="12px;">CSS
 <img src="image/Tech/JavaScript.jpeg" height="12px;">JavaScript
+<img src="image/Tech/Python.jpeg" height="12px;">Python
 </td>
 </tr>
 <tr>
 <td>Tool</td>
 <td>
-<img src="image/Tool/Google_Sites.jpeg" height="12px;">Google Sites
-<img src="image/Tool/Google_Apps_Script.jpeg" height="12px;">Google Apps Script
-<img src="image/Tool/Google_Sheets.jpeg" height="12px;">Google Sheets
 </td>
 </tr>
 </table> 
