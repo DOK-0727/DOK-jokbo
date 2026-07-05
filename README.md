@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <b>크롬북의 불편함을 해결하는 학생 편의 중심의 웹 사이트</b>
+  <b>족보 작업의 불편함을 해결하는 사용자 편의 중심의 웹 사이트</b>
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 <td>개발 목적</td>
-<td>이 프로젝트는 족보 작업의 불편함을 해결하기 위해 저의 편의를 중심으로 개발되었습니다.</td>
+<td>이 프로젝트는 족보 작업의 불편함을 해결하기 위해 사용자의 편의를 중심으로 개발되었습니다.</td>
 </tr>
 <tr>
 <td>개발 기간</td>
@@ -126,7 +126,7 @@
 <summary><b>과목 관리</b></summary>
 <br>
 <p align="center">
-  <img src="image/Element/login.png" height="150">
+  <img src="image/Element/subject_management.png" height="150">
   <br>
   <img src="image/Tech/HTML.jpeg" height="12px;">HTML
   <img src="image/Tech/CSS.jpeg" height="12px;">CSS
