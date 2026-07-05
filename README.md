@@ -39,9 +39,9 @@
 
 <p align="center">
   <a href="">
-    <img src="image/SAEROM.jpeg" alt="Project Logo" width="150" height="150">
+    <img src="image/DOK.jpg" alt="Project Logo" width="150" height="150">
     <br>
-    <b>SAEROM-student_main</b>
+    <b>DOK-jokbo</b>
   </a>
 </p>
 
