@@ -10,15 +10,15 @@ import re
 import pyperclip
 from selenium.webdriver.chrome.options import Options
 
-def login(user_id, user_pw):
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.continue"))).click()
-
-    wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "로그인"))).click()
-
-    pyperclip.copy(user_id)
-    #pyperclip.copy(user_pw)
-
-    wait.until(lambda driver: "login" not in driver.current_url)
+# def login(user_id, user_pw):
+#     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.continue"))).click()
+#
+#     wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "로그인"))).click()
+#
+#     pyperclip.copy(user_id)
+#     #pyperclip.copy(user_pw)
+#
+#     wait.until(lambda driver: "login" not in driver.current_url)
 
 
 def write(subject, professor, short):
@@ -32,7 +32,7 @@ def write(subject, professor, short):
     wait.until(EC.presence_of_element_located((By.NAME, "text"))) \
         .send_keys(f"{subject},{short} ({professor} 교수님) 족보 있습니다. 쪽지주세요.")
 
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "li.anonym"))).click()
+    # wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "li.anonym"))).click()
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "li.submit"))).click()
 
     alert = wait.until(EC.alert_is_present())
